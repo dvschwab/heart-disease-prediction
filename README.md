@@ -3,7 +3,7 @@ A logistic regression model to predict heart disease from 13 features
 
 This model predicts the presence or absence of heart disease based on 13 medical and demographic features. It uses data from https://www.kaggle.com/ronitf/heart-disease-uci, which was published by researchers in de-identified form. There are 296 cases total, of which 136 indicate heart disease.
 
-The notebook was built with Python 3.8.10. The YAML file lists the required packages and may be used to create a conda environment with these packages: see *running_the_model.txt* for details.
+The notebook was built with Python 3.8.10. The YAML file lists the required packages and may be used to create a conda environment with these packages: see `RUNNING_THE_MODEL` for details.
 
 For questions or comments, please contact me at dvschwab@protonmail.com.
 
