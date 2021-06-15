@@ -1,0 +1,11 @@
+age,sex,chest_pain,rest_bp,chol,blood_sugar,restecg,max_heart_rate,angina,oldpeak,ST_slope,flouroscopy,heart_defect,heart_disease
+47,Male,No,110,275,No,Yes,118,Yes,1,No,Nonzero,No,Yes
+57,Male,No,110,335,No,No,143,Yes,3,No,Nonzero,Yes,Yes
+71,Female,No,112,149,No,No,125,No,1.6,No,Zero,No,No
+45,Female,Yes,112,160,No,No,138,No,0,No,Zero,No,No
+47,Male,No,112,204,No,No,143,No,0.1,Yes,Zero,No,No
+66,Male,No,112,212,No,Yes,132,Yes,0.1,Yes,Nonzero,No,Yes
+58,Male,Yes,112,230,No,Yes,165,No,2.5,No,Nonzero,Yes,Yes
+52,Male,No,112,230,No,No,160,No,0,Yes,Nonzero,No,Yes
+41,Male,Yes,112,250,No,No,179,No,0,Yes,Zero,No,No
+41,Female,Yes,112,268,No,Yes,172,Yes,0,Yes,Zero,No,No

@@ -36,16 +36,17 @@ These are the demographic and continuous features used in the model:
 > * chol: serum cholestoral (mg/dl)
 > * oldpeak: ST depression from exercise
 
-These are the categorical features. Each one indicates the presence of the named indicator, except for *flouroscopy*, which indicates how many major vessels were colored by a specific flouroscopic test (Zero or OneOrMore).
+These are the categorical features. Each one indicates the presence of the named indicator, except for *flouroscopy*, which indicates how many major vessels were colored by a specific flouroscopic test (Zero or Nonzero). In all cases, Yes indicates an abnormal condition while No indicates normal functioning.
 
-Note that some of these features were recoded as binary with different levels of the indicator collapsed as *True*. The notebook contains a complete description of the original variables and the recoding applied.
+Note that some of these features were recoded as binary with different levels of the indicator collapsed as *True*. The notebook contains a complete description of the original variables and the recoding applied. Also, the notebook codes each feature as 0/1 rather than as text, which is used here to make the data more understandable.
 
-> * chest_pain: chest pain (True/False)
-> * blood_sugar: fasting blood sugar > 120 mg/dl (True/False)
-> * angina: exercise-induced angina (True/False)
-> * ST_slope: abnormal ST slope (True/False)
-> * flouroscopy: number of vessels colored by flouroscopy (Zero/OneOrMore)
-> * heart_defect: heart defect (True/False)
+> * chest_pain: chest pain (Yes/No)
+> * blood_sugar: fasting blood sugar > 120 mg/dl (Yes/No)
+> * restecg: abnormality (Yes/No)
+> * angina: exercise-induced angina (Yes/No)
+> * ST_slope: abnormal ST slope (Yes/No)
+> * flouroscopy: number of vessels colored by flouroscopy (Zero/Nonzero)
+> * heart_defect: heart defect (Yes/No)
 
 The target variable, *heart_disease*, is coded *Yes* or *No*.
 
