@@ -27,31 +27,37 @@ The relatively small number of cases per model feature is another limitation. Fo
 
 ## Feature Descriptions
 
-These are the demographic and continuous features used in the model:
+For clarity, only the reduced model with 9 predictors is described from this point on. Full descriptions of all three models are available in the main notebook `heart-disease-prediction-data-analysis.ipynb`.
+
+These are the demographic and numeric (i.e. continuous) features used in the model:
 
 > * age: age of subject
 > * sex: sex of subject (Male/Female)
 > * max_heart_rate: maximum heart rate
-> * rest_bp: resting blood pressure
-> * chol: serum cholestoral (mg/dl)
 > * oldpeak: ST depression from exercise
 
 These are the categorical features. Each one indicates the presence of the named indicator, except for *flouroscopy*, which indicates how many major vessels were colored by a specific flouroscopic test (Zero or Nonzero). In all cases, Yes indicates an abnormal condition while No indicates normal functioning.
 
-Note that some of these features were recoded as binary with different levels of the indicator collapsed as *True*. The notebook contains a complete description of the original variables and the recoding applied. Also, the notebook codes each feature as 0/1 rather than as text, which is used here to make the data more understandable.
-
 > * chest_pain: chest pain (Yes/No)
-> * blood_sugar: fasting blood sugar > 120 mg/dl (Yes/No)
-> * restecg: abnormality (Yes/No)
 > * angina: exercise-induced angina (Yes/No)
 > * ST_slope: abnormal ST slope (Yes/No)
 > * flouroscopy: number of vessels colored by flouroscopy (Zero/Nonzero)
 > * heart_defect: heart defect (Yes/No)
 
-The target variable, *heart_disease*, is coded *Yes* or *No*.
+The target variable, *heart_disease*, is coded *Yes* or *No*. The data for the model presented here has 160 cases without heart disease and 136 with heart disease, totalling 296 cases in all.
 
-# Representative Data Sample
+## Representative Data Sample
 
-This is a representative sample of 10 cases from the data frame used to fit the model.
+This is a representative sample of 10 cases from the data frame used to fit the reduced model. The categorical features have been replaced with text to make them more understandable.
 
-![](Images/df_heart_present.png)
+![](Images/heart_df_present.png)
+
+## Descriptive Statistics
+
+These are a three of the descriptive statistics estimated for the model. The first figure presents summary statistics for the four numeric features. The remaining figures present a heatmap of the cross-correlations between these features and a representative boxplot comparing the presence of heart disease vs. the maximum heart rate.
+
+### Summary of Numeric Features
+
+
+
+
