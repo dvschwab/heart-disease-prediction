@@ -1,0 +1,4 @@
+TO DO FOR HEART-DISEASE MODEL
+
+* Verify that setting Pandas precision = 2 didn't affect model calculations; if it did, change it and re-run the models
+* *Add dataframe-image module to the heart-disease-deploy YAML file (6/21/21)

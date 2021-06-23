@@ -1,6 +1,7 @@
 name: heart-disease-deploy
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - argon2-cffi=20.1.0=py38h2bbff1b_1
   - async_generator=1.10=pyhd3eb1b0_0
@@ -15,6 +16,7 @@ dependencies:
   - cycler=0.10.0=py38_0
   - decorator=5.0.9=pyhd3eb1b0_0
   - defusedxml=0.7.1=pyhd3eb1b0_0
+  - dataframe_image=0.1.1=py_0
   - entrypoints=0.3=py38_0
   - freetype=2.10.4=hd328e21_0
   - icc_rt=2019.0.0=h0cc432a_1
