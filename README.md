@@ -54,10 +54,29 @@ This is a representative sample of 10 cases from the data frame used to fit the 
 
 ## Descriptive Statistics
 
-These are a three of the descriptive statistics estimated for the model. The first figure presents summary statistics for the four numeric features. The remaining figures present a heatmap of the cross-correlations between these features and a representative boxplot comparing the presence of heart disease vs. the maximum heart rate.
+These are three descriptive statistics estimated for the model. The first figure presents summary statistics for the four numeric features. The remaining figures present a heatmap of the cross-correlations between these features and a representative boxplot comparing the presence of heart disease vs. the maximum heart rate.
 
 ### Summary of Numeric Features
 
 
+Summary statistics for the numeric variables are unexceptional. This may be due to the fact that the features are well-established medical measurement that are known to be at least approximately normal for large samples.
 
+![](Images/heart_disease_summary.png)
 
+### Correlation of Numeric Features
+
+The correlation between the three numeric features in the reduced model is shown here as a heatmap. As with a traditional correlation matrix, the diagonal elements show each feature's correlation with itself and are therefore unimportant. The remaining elements show the cross-correlation between the row feature and the column feature: for example, the element at the upper right is the correlation between the features *age* and *oldpeak*
+
+The scale on the right-hand side ranges from perfect positive correlation (at the top) to perfect negative correlation (at the bottom). As can be seen, blue elements show positive correlation and green elements show negative correlation; in both cases, darker colors indicate a stronger correlation. Here, we se a small positive correlation between the features *age* and *old_peak* (approx. 0.25) and a small negative correlation between the remaining two features (approx. -.025). Since these features are included in the model, the presence of small correlations is desirable so that the effect of each feature on the target is relatively independent.
+
+![](Images/heart_corr_heatmap.png)
+
+### Boxplot of Maximum Heart Rate vs. Heart Disease
+
+This boxplot shows the relationship between the feature *max_heart_rate* and the target. It is representative of the relationships between each numeric feature and the target. Note that the 20 outliers have been excluded from the plot to aid in readability.
+
+As can be seen, patients with heart disease have a relatively lower maximum heart rate: the median value is approximately 20 beats less for patients with heart disease. This indicates the feature may be a good predictor of heart disease.
+
+![](Images/boxplot_heart_rate_vs_disease.png)
+
+## Model Estimation and Results
