@@ -1,5 +1,0 @@
-TO DO FOR HEART-DISEASE MODEL
-
-* *Verify that setting Pandas precision = 2 didn't affect model calculations; if it did, change it and re-run the models (6/24/2021)
-* *Add dataframe-image module to the heart-disease-deploy YAML file (6/21/21)
-   Fix heatmap so it doesn't crop left side feature names
