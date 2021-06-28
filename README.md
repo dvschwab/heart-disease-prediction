@@ -19,9 +19,8 @@ All perform well, with a median accuracy of 83% for the test data. None of the m
 
 >> Cross-Validation (5 splits)  
 >> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
->> Test MSE:      [0.25, 0.17, 0.10, 0.10, 0.14]
 
-All results are for the test data; *accuracy* is the mean accuracy for both targets, while *MSE* is the mean-squared error. Each split contained 59 or 60 cases. The sample dependence is clear from the first, third, and fourth splits.
+All results are for the test data. *Accuracy* is the total accuracy for both targets. The sample dependence is clear from the first, third, and fourth splits.
 
 The relatively small number of cases per model feature is another limitation. For the reduced model containing 9 features and using a 30/70 test-train split, this amounts to 89 cases / 9 features = 10 cases per feature (standard rounding). Most researchers consider this the minimum ratio of cases-to-feature, as the coefficient standard errors will likely be too large to evaluate the relative importance of each feature.
 
@@ -189,3 +188,30 @@ Finally, a five-fold cross-validation is performed; cases are shuffled before es
     model_coef.update({
         model['model_name']: model['coef']})
 ```
+
+### Model Results
+
+The model results are presented below.
+
+#### Accuracy and Cross-Validation
+
+With a 70/30 test-train split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target. For the cross-validation samples the mean-squared error (MSE) was also estimated.
+
+Model: CLF_REDUCED (296 cases)
+_____________________________
+
+Training Score (accuracy): 0.86
+Testing Score (accuracy): 0.82
+
+>> Cross-Validation (5 splits)  
+>> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
+
+As can be seen, the accuracy for the test data from the test-train split is 82%, meaning the model correctly predicted the target for 243 of 296 cases. The training data correctly predicted 86% (255 targets)--a difference of only 12 targets.
+
+However, the cross-validation results show the model is sample dependent, with the accuracy of model predictions varying from a low of 75% (222 targets) to a high of 90% (266 targets): a clearly substantial difference of 44 targets. In addition, the sample with the lowest accuracy predicted the wrong target 25% of the time, for a total of 74 incorrect diagnoses. Clearly, the model should not be relied upon until the sample dependence is addressed and the performance of each sample during cross-validation is substantially more accurate.
+
+#### Classification Report
+
+While model accuracy estimates how many correct predictions were made, the classification report presents the model's tendency to make Type I or Type II errors (false positives and false negatives, respectively). Here, the report presents both *precision* and *recall* for both targets: *precision* is the number of **true positives** divided by the **total number of all positives**, while *recall* is the number of **true positives** divided by the **number of true positives and false negatives.**
+
+Colloquially, *precision* penalizes the model for being over-aggressive (i.e. erring on the side of a positive prediction), while *recall* penalizes it for being overly-conservative (i.e. erring on the side of a negative prediction). While a good model will achieve relative balance between false positives and false negatives, a model used for medical diagnosis should, of course, be less likely to predict the absence of disease in an affected patient (a false negative) than to predict the presence of disease where there is none.
