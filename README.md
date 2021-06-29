@@ -17,8 +17,8 @@ The notebook fits 3 versions of a logistic regression model:
 
 All perform well, with a median accuracy of 83% for the test data. None of the models are prone to false positives, although each is slightly better at predicting the absence of heart disease than its presence. However, the cross-validation scores show sample dependence for each model, as shown below for the reduced model:
 
->> Cross-Validation (5 splits)  
->> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
+> Cross-Validation (5 splits)  
+> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
 
 All results are for the test data. *Accuracy* is the total accuracy for both targets. The sample dependence is clear from the first, third, and fourth splits.
 
@@ -195,16 +195,15 @@ The model results are presented below.
 
 #### Accuracy and Cross-Validation
 
-With a 70/30 test-train split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target. For the cross-validation samples the mean-squared error (MSE) was also estimated.
+With a 70/30 test-train split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target.
 
 Model: CLF_REDUCED (296 cases)
-_____________________________
 
 Training Score (accuracy): 0.86
 Testing Score (accuracy): 0.82
 
->> Cross-Validation (5 splits)  
->> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
+> Cross-Validation (5 splits)  
+> Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
 
 As can be seen, the accuracy for the test data from the test-train split is 82%, meaning the model correctly predicted the target for 243 of 296 cases. The training data correctly predicted 86% (255 targets)--a difference of only 12 targets.
 
@@ -215,3 +214,12 @@ However, the cross-validation results show the model is sample dependent, with t
 While model accuracy estimates how many correct predictions were made, the classification report presents the model's tendency to make Type I or Type II errors (false positives and false negatives, respectively). Here, the report presents both *precision* and *recall* for both targets: *precision* is the number of **true positives** divided by the **total number of all positives**, while *recall* is the number of **true positives** divided by the **number of true positives and false negatives.**
 
 Colloquially, *precision* penalizes the model for being over-aggressive (i.e. erring on the side of a positive prediction), while *recall* penalizes it for being overly-conservative (i.e. erring on the side of a negative prediction). While a good model will achieve relative balance between false positives and false negatives, a model used for medical diagnosis should, of course, be less likely to predict the absence of disease in an affected patient (a false negative) than to predict the presence of disease where there is none.
+
+|             | precision | recall |
+| -------     | ---------:| ------:|
+| no disease  | 0.84      | 0.84   |
+| disease     | 0.79      | 0.79   |
+
+For this model, both *precision* and *recall* are slightly higher when the target is *no disease* than *disease*. This shows the model is better at correctly predicting *no disease*, with 84% of all true positives correctly assigned and no tendency to over-predict or under-predict this target. For the target *disease*, 79% of true positives are correctly assigned; again, there is no tendency toward over-prediction or under-prediction.
+
+## Conclusion
