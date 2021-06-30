@@ -1,8 +1,6 @@
 # heart-disease-prediction
 
-A logistic regression model to predict heart disease from 13 features
-
-This model predicts the presence or absence of heart disease based on 13 medical and demographic features. It uses data from https://www.kaggle.com/ronitf/heart-disease-uci, which was published by researchers in de-identified form. There are 296 cases total, of which 136 indicate heart disease.
+This notebook predicts the presence or absence of heart disease based on medical and demographic features. It uses data from https://www.kaggle.com/ronitf/heart-disease-uci, which was published by researchers in de-identified form. There are 296 cases total, of which 136 indicate heart disease.
 
 The notebook was built with Python 3.8.10. The YAML file lists the required packages and may be used to create a conda environment with these packages: see `RUNNING_THE_MODEL` for details.
 
@@ -17,7 +15,7 @@ The notebook fits 3 versions of a logistic regression model:
 
 All perform well, with a median accuracy of 83% for the test data. None of the models are prone to false positives, although each is slightly better at predicting the absence of heart disease than its presence. However, the cross-validation scores show sample dependence for each model, as shown below for the reduced model:
 
-> Cross-Validation (5 splits)  
+> ##### Cross-Validation (5 splits)  
 > Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
 
 All results are for the test data. *Accuracy* is the total accuracy for both targets. The sample dependence is clear from the first, third, and fourth splits.
@@ -53,7 +51,7 @@ This is a representative sample of 10 cases from the data frame used to fit the 
 
 ## Descriptive Statistics
 
-These are three descriptive statistics estimated for the model. The first figure presents summary statistics for the four numeric features. The remaining figures present a heatmap of the cross-correlations between these features and a representative boxplot comparing the presence of heart disease vs. the maximum heart rate.
+These are three descriptive statistics estimated for the model. The first figure presents summary statistics for the three numeric features. The remaining figures present a heatmap of the cross-correlations between these features and a representative boxplot comparing the presence of heart disease vs. the maximum heart rate.
 
 ### Summary of Numeric Features
 
@@ -66,7 +64,9 @@ Summary statistics for the numeric variables are unexceptional. This may be due 
 
 The correlation between the three numeric features in the reduced model is shown here as a heatmap. As with a traditional correlation matrix, the diagonal elements show each feature's correlation with itself and are therefore unimportant. The remaining elements show the cross-correlation between the row feature and the column feature: for example, the element at the upper right is the correlation between the features *age* and *oldpeak*
 
-The scale on the right-hand side ranges from perfect positive correlation (at the top) to perfect negative correlation (at the bottom). As can be seen, blue elements show positive correlation and green elements show negative correlation; in both cases, darker colors indicate a stronger correlation. Here, we se a small positive correlation between the features *age* and *old_peak* (approx. 0.25) and a small negative correlation between the remaining two features (approx. -.025). Since these features are included in the model, the presence of small correlations is desirable so that the effect of each feature on the target is relatively independent.
+The scale on the right-hand side ranges from perfect positive correlation (at the top) to perfect negative correlation (at the bottom). As can be seen, blue elements show positive correlation and green elements show negative correlation; in both cases, darker colors indicate a stronger correlation.
+
+Here, we se a small positive correlation between the features *age* and *old_peak* (approx. 0.25) and a small negative correlation between the remaining two features (approx. -.025). Since these features are included in the model, the presence of small correlations is desirable so that the effect of each feature on the target is relatively independent.
 
 ![](Images/heart_corr_heatmap.png)
 
@@ -91,13 +91,12 @@ The model was estimated using the `LogisticRegression` method from the `sklearn`
 The following code excerpt defines the global parameters (i.e. the ones applying to all three models) and the parameters for the reduced model. Note that the complete notebook includes the parameters for the additional models as well.
 
 ```python
-
 # Configure estimator parameters and define model features
 
 params = {
     'test_size': 0.3,
     'random_state': 823,
-    'metrics': ['accuracy','neg_mean_squared_error'],
+    'metrics': ['accuracy'],
     'cv_splits': 5
 }
 
@@ -115,10 +114,10 @@ Having defined the parameters, the following code excerpts estimates each model 
 First, the estimator is configured and set to run for 1,000 iterations to ensure convergence. A list of all models is also created to be iterated over in the loop.
 
 ```python
-models = [model1, model2, model3]
+models = [model_full, model_reduced, model_trimmed]
 clf = LogisticRegression(max_iter=1000)
 df = df_heart_scaled.copy()
-model_coef = collections.OrderedDict()            # Needed so order of columns in df matches insertion order
+model_coef = collections.OrderedDict()            
 ```
 
 #### Main Loop: Handling Outliers
@@ -197,10 +196,10 @@ The model results are presented below.
 
 With a 70/30 test-train split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target.
 
-Model: CLF_REDUCED (296 cases)
+> ##### Model: CLF_REDUCED (296 cases)
 
-Training Score (accuracy): 0.86
-Testing Score (accuracy): 0.82
+> Training Score (accuracy): 0.86  
+> Testing Score (accuracy): 0.82
 
 > Cross-Validation (5 splits)  
 > Test Accuracy: [0.75, 0.83, 0.90, 0.90, 0.86]  
@@ -223,3 +222,7 @@ Colloquially, *precision* penalizes the model for being over-aggressive (i.e. er
 For this model, both *precision* and *recall* are slightly higher when the target is *no disease* than *disease*. This shows the model is better at correctly predicting *no disease*, with 84% of all true positives correctly assigned and no tendency to over-predict or under-predict this target. For the target *disease*, 79% of true positives are correctly assigned; again, there is no tendency toward over-prediction or under-prediction.
 
 ## Conclusion
+
+This notebook predicted heart disease based on demographic and medical features. Three logistic regression models were estimated using the `sklearn` package. The reduced model (described here) contained 9 features and had an accuracy of 82% for the test data, correctly predicting 243 of 296 cases. The classification report demonstrates the model is not prone to either false positives or false negatives, although it performs slightly better when predicting *no disease* than *disease*. However, the cross-validation scores show clear sample dependence, and the relatively few cases compared to the number of features make it unfeasable to generalize these results to the population, or to determine which features are most important for making correct predictions.
+
+Despite these limitations, the model deserves further study. If additional cases are not available, then using 3 or 4 folds for cross-validation may help determine the extent of sample reliance. The confusion matrix could also be generated and used to determine if certain features or cases are influencing incorrect predictions. Coefficient estimation may benefit by using scaled features, so that both feature coefficients and standard errors are directly comparable. It is hoped that, even if these changes do not appreciably improve the model's predictive power, isolating the cause of these incorrect predications will spur further research and model refinement.
