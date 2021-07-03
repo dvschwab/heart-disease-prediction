@@ -107,7 +107,7 @@ model_reduced = {
 }
 ```
 
-Having defined the parameters, the following code excerpts estimates each model using a loop.
+Having defined the parameters, the following code excerpt estimates each model using a loop.
 
 #### Configure Estimator
 
@@ -141,7 +141,7 @@ for model in models:
 
 #### Main Loop: Model Estimation and Fit
 
-Next, the features and target vectors are defined as *X* and *y*. After that, a 70/30 test-train split is performed and the logistic regression fit using the training data. The number of cases, training score, and testing score are then added to the model dictionary for later use.
+Next, the features and target vectors are defined as *X* and *y*. After that, a 70/30 train-test split is performed and the logistic regression fit using the training data. The number of cases, training score, and testing score are then added to the model dictionary for later use.
 
 ```python
     # Define the model
@@ -150,7 +150,7 @@ Next, the features and target vectors are defined as *X* and *y*. After that, a 
     X = df[clf_cols]
     y = df["heart_disease"]
     
-    # Test-train split and accuracy scores
+    # Train-test split and accuracy scores
     
     X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                         test_size = params['test_size'],
@@ -194,7 +194,7 @@ The model results are presented below.
 
 #### Accuracy and Cross-Validation
 
-With a 70/30 test-train split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target.
+With a 70/30 train-test split and 296 cases, the reduced model was trained with 207 cases and tested with 89 cases. Five-fold cross-validation was performed with 59 cases in four samples and 61 cases in the fifth sample. In both cases, the estimated accuracy is the percentage of cases in the sample where the model predicted the correct target.
 
 > ##### Model: CLF_REDUCED (296 cases)
 
